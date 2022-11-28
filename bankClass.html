@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="text-align: center">
+        <h1>SEE YOUR CURRENT BALANCE HERE!!!</h1>
+      <input type="text" id="amount" />
+      <button id="deposit">Deposit</button>
+      <button id="withdraw">Withdraw</button>
+      <h2 id="balance">Balance: 100</h1>
+    </div>
+    <script>
+      class Bank {
+        constructor(name, branch) {
+          this.name = name;
+          this.branch = branch;
+          this.currentBalance = 100;
+        }
+
+        deposit(amount) {
+          this.currentBalance += amount;
+          //   console.log(`Deposited Amount: ${amount}`);
+          console.log(
+            `Your current balance after Depositing ${amount} is ${this.currentBalance}`
+          );
+        }
+
+        withdraw(amount) {
+          if (this.currentBalance > amount) {
+            this.currentBalance -= amount;
+            console.log(
+              `Your current balance after Withdrawing ${amount} is ${this.currentBalance}`
+            );
+          } else {
+            console.error(
+              `YOU CANNOT WITHDRAW ${amount} YOUR CURRENT BALANCE IS ONLY ${this.currentBalance}`
+            );
+          }
+          //   this.currentBalance -= amount;
+          //   console.log(`Withdrawd Amount: ${amount}`);
+          //   console.log(
+          //     `Your current balance after Withdrawing ${amount} is ${this.currentBalance}`
+          //   );
+        }
+        viewBalance = () => {
+          console.log(`Your current balance is ${this.currentBalance}`);
+        };
+      }
+
+      vraj = new Bank("Axis", "Halol");
+      //   dhruv = new Bank("IOB", "Halol");
+      //   vraj.viewBalance();
+      //   vraj.deposit(10000);
+      //   vraj.deposit(10000);
+      //   vraj.deposit(10000);
+      //   vraj.withdraw(1000);
+      //   vraj.withdraw(20000);
+      //   vraj.withdraw(5000);
+      //   vraj.withdraw(1000);
+
+      const amountInput = document.getElementById("amount");
+      const depositButton = document.getElementById("deposit");
+      const withdrawButton = document.getElementById("withdraw");
+      const balance = document.getElementById("balance");
+
+      depositButton.onclick = () => {
+        vraj.deposit(Number(amountInput.value));
+        balance.innerText = `Current Balance: ${vraj.currentBalance}`;
+        balance.style = "color:darkgreen";
+      };
+      withdrawButton.onclick = () => {
+        vraj.withdraw(Number(amountInput.value));
+        balance.innerText = `Current Balance: ${vraj.currentBalance}`;
+        balance.style = "color:red";
+      };
+    </script>
+  </body>
+</html>
